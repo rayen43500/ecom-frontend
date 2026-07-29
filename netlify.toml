@@ -4,6 +4,9 @@
   command = "npm run build"
   publish = "build"
 
+[build.environment]
+  CI = "false"
+
 # Redirect rules for Single Page Application (SPA) routing and API proxying
 [[redirects]]
   from = "/api/*"
