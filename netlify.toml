@@ -1,0 +1,17 @@
+# Netlify configuration file inside the frontend folder
+
+[build]
+  command = "npm run build"
+  publish = "build"
+
+# Redirect rules for Single Page Application (SPA) routing and API proxying
+[[redirects]]
+  from = "/api/*"
+  to = "https://ecom-backend-4i37.onrender.com/api/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
