@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { load_UserProfile } from "./actions/userAction";
 import CricketBallLoader from "./component/layouts/loader/Loader";
 import PrivateRoute from "./component/Route/PrivateRoute";
-import { SpeedInsights } from "@vercel/speed-insights/react";
 import "./App.css";
 
 import Header from "./component/layouts/Header1.jsx/Header";
@@ -69,7 +68,6 @@ function App() {
 
   return (
     <>
-      <SpeedInsights />
       <Suspense fallback={<CricketBallLoader />}>
         <Switch>
           <Route

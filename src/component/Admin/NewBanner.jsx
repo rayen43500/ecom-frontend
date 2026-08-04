@@ -159,7 +159,12 @@ function NewBanner() {
 
                   {imagePreview && (
                     <div className={classes.imageArea}>
-                      <img src={imagePreview} alt="Banner preview" className={classes.image} style={{ width: 120, height: 72 }} />
+                      <img
+                        src={imagePreview}
+                        alt="Banner preview"
+                        className={classes.image}
+                        style={{ width: 120, height: 72 }}
+                      />
                     </div>
                   )}
 

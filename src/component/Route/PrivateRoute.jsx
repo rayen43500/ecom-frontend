@@ -1,18 +1,11 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import { Redirect, Route } from "react-router-dom";
-import { load_UserProfile } from "../../actions/userAction";
 import CricketBallLoader from "../layouts/loader/Loader";
 function PrivateRoute({ isAdmin, component: Component, ...rest }) {
   const { loading, isAuthenticated, user } = useSelector(
     (state) => state.userData
   );
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(load_UserProfile());
-  }, [dispatch]);
-
 
   if (loading) {
     return <CricketBallLoader />; 

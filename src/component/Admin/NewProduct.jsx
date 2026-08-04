@@ -31,6 +31,12 @@ import {
   Button,
 } from "@material-ui/core";
 
+const createEmptyVariant = () => ({
+  color: "",
+  images: [],
+  previews: [],
+});
+
 function NewProduct() {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -47,6 +53,7 @@ function NewProduct() {
   const [info , setInfo] = useState("")
   const [images, setImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
+  const [variants, setVariants] = useState([createEmptyVariant()]);
   const [isCategory, setIsCategory] = useState(false);
   const fileInputRef = useRef();
   const [toggle, setToggle] = useState(false);
@@ -101,6 +108,17 @@ function NewProduct() {
     myForm.set("category", category);
     myForm.set("Stock", Stock);
     myForm.set("info", info);
+    myForm.set(
+      "variants",
+      JSON.stringify(
+        variants
+          .filter((variant) => variant.color.trim() && variant.images.length > 0)
+          .map((variant) => ({
+            color: variant.color.trim(),
+            images: variant.images,
+          }))
+      )
+    );
     images.forEach((currImg) => {
       myForm.append("images", currImg);
     });
@@ -123,6 +141,53 @@ function NewProduct() {
       };
       reader.readAsDataURL(file);
     });
+  };
+
+  const handleVariantColorChange = (index, value) => {
+    setVariants((prev) =>
+      prev.map((variant, currentIndex) =>
+        currentIndex === index ? { ...variant, color: value } : variant
+      )
+    );
+  };
+
+  const handleVariantImagesChange = (index, event) => {
+    const files = Array.from(event.target.files || []);
+    if (!files.length) return;
+
+    const nextVariantImages = [];
+    const nextVariantPreviews = [];
+
+    files.forEach((file) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          nextVariantPreviews.push(reader.result);
+          nextVariantImages.push(reader.result);
+
+          setVariants((prev) =>
+            prev.map((variant, currentIndex) =>
+              currentIndex === index
+                ? {
+                    ...variant,
+                    images: nextVariantImages,
+                    previews: nextVariantPreviews,
+                  }
+                : variant
+            )
+          );
+        }
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const addVariant = () => {
+    setVariants((prev) => [...prev, createEmptyVariant()]);
+  };
+
+  const removeVariant = (index) => {
+    setVariants((prev) => prev.filter((_, currentIndex) => currentIndex !== index));
   };
 
   return (
@@ -315,6 +380,60 @@ function NewProduct() {
                       ),
                     }}
                   />
+
+                  <div style={{ width: "100%", marginBottom: "1.25rem" }}>
+                    <Typography variant="body2" style={{ marginBottom: "0.5rem", color: "#6b7280", fontWeight: 600 }}>
+                      Color variants
+                    </Typography>
+                    {variants.map((variant, index) => (
+                      <div
+                        key={index}
+                        style={{
+                          border: "1px solid rgba(0,0,0,0.08)",
+                          borderRadius: 12,
+                          padding: 12,
+                          marginBottom: 12,
+                          background: "#fafafa",
+                        }}
+                      >
+                        <TextField
+                          variant="outlined"
+                          fullWidth
+                          label={`Color ${index + 1}`}
+                          value={variant.color}
+                          onChange={(e) => handleVariantColorChange(index, e.target.value)}
+                          style={{ marginBottom: 12 }}
+                        />
+                        <input
+                          type="file"
+                          accept="image/*"
+                          multiple
+                          onChange={(e) => handleVariantImagesChange(index, e)}
+                          style={{ marginBottom: 10 }}
+                        />
+                        {variant.previews.length > 0 && (
+                          <Box className={classes.imageArea} style={{ marginTop: 8 }}>
+                            {variant.previews.map((preview, previewIndex) => (
+                              <img
+                                key={previewIndex}
+                                src={preview}
+                                alt={`Variant ${index + 1} preview ${previewIndex + 1}`}
+                                className={classes.image}
+                              />
+                            ))}
+                          </Box>
+                        )}
+                        <div style={{ display: "flex", justifyContent: "space-between", gap: 8, marginTop: 8 }}>
+                          <Button variant="outlined" onClick={() => removeVariant(index)} disabled={variants.length === 1}>
+                            Remove variant
+                          </Button>
+                        </div>
+                      </div>
+                    ))}
+                    <Button variant="outlined" onClick={addVariant} style={{ marginTop: 4 }}>
+                      Add another color
+                    </Button>
+                  </div>
 
                   <div className={classes.root}>
                     <div className={classes.imgIcon}>

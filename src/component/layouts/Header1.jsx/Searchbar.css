@@ -1,22 +1,23 @@
-.search_from{
-    width: 70vw;
-    height: 25px;
-    padding: auto;
-}
-@media (max-width: 899px){
- .search_from{
-     width: 40vw;
- }  
+.search_from {
+  width: min(72vw, 42rem);
+  display: flex;
+  align-items: center;
 }
 
-.closeIcon  {
-  color: #000000;
-  font-size: 1.8rem;
-  transition: color 0.2s ease-in-out;
+@media (max-width: 899px) {
+  .search_from {
+    width: min(88vw, 28rem);
+  }
 }
 
-/* Apply the hover effect on the CloseOutlined icon */
+.closeIcon {
+  color: #111827;
+  font-size: 1.55rem;
+  transition: color 0.18s ease, transform 0.18s ease;
+}
+
 .closeIcon:hover {
   color: #e30605;
+  transform: translateY(-1px);
 }
 
