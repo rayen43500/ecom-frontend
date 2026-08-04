@@ -11,9 +11,11 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: 2rem;
   width: 100%;
   padding: 2rem 1rem 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 /* Logo section */
@@ -113,7 +115,7 @@
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1rem;
-    width: min(100%, 40rem);
+    width: min(100%, 42rem);
     padding: 0;
   }
 
@@ -148,7 +150,7 @@
 
 /* Links section */
 .foot_links {
-  width: min(100%, 16rem);
+  width: min(100%, 17rem);
 }
 
 .foot_dowload_appLink {
@@ -176,6 +178,12 @@
   opacity: 0.88;
 }
 
+.foot_social {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
 .foot_social a:hover {
   color: #fff;
   opacity: 1;
@@ -197,6 +205,7 @@
   align-items: center;
   gap: 0.5rem;
   padding: 1rem;
+  background: rgba(0, 0, 0, 0.35);
 }
 
 .foot_policyLink ul {
@@ -218,25 +227,6 @@
   font-size: 0.82rem;
   font-weight: 500;
 }
-.foot_copyright > * {
-  display: flex;
-  gap: 5px;
-  text-decoration: none;
-  font-weight: 400;
-  font-size: 12px;
-  margin-left: 38px;
-  align-content: center;
-}
-
-.foot_copyright a {
-  text-decoration: none;
-  color: rgba(248, 245, 245, 0.733);
-}
-
-.foot_copyright a:hover {
-  color: #fff;
-}
-
 .facebook_icon {
   font-size: 18px;
 }
@@ -293,48 +283,16 @@
     width: 100%;
   }
 
+  .foot_menu_container {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .foot_social {
+    justify-content: flex-start;
+  }
+
   .foot_policyLink ul {
     justify-content: center;
   }
-}
-
-.foot_form .btnFooter {
-  width: 100%;
-}
-  .foot_menu {
-    margin-left: 3px;
-  }
-  .foot_menu ul li,
-  .foot_social a {
-    font-size: 12px;
-    margin-bottom: 5px;
-  }
-
-  .sub_footer_wrapper ul li {
-    font-size: 10px;
-  }
-  .foot_policyLink ul {
-    justify-content: space-around;
-  }
-  .foot_policyLink ul {
-    margin-left: -31px;
-  }
-
-.foot_policyLink_p {
-  font-size: 13px;
-}
-
-.foot_copyright > * {
-  gap: 2px;
-  font-size: 11px;
-  margin-left: 15px;
-}
-
-.app_links {
-  gap: 1rem;
-}
-
-.Foot_heading {
-  margin-left: 36px;
 }
 
