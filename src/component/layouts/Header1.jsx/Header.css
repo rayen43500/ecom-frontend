@@ -58,6 +58,8 @@
 .headerFlag {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+  min-width: 150px;
 }
 
 .headerLogin {
@@ -188,6 +190,10 @@
   .headerRetailer,
   .headerLogin {
     display: none;
+  }
+
+  .headerFlag {
+    min-width: auto;
   }
 
   .headerBottom {
